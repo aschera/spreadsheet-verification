@@ -1,0 +1,60 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and Validate Spreadsheet</title>
+    <style>
+        /* Hide the default file input button */
+        input[type="file"] {
+            display: none;
+        }
+        /* Style the custom button */
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        /* Style the file name display */
+        #file-name {
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload and Validate Spreadsheet</h1>
+    <!-- Form for file upload -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Custom file upload button -->
+        <label for="file-upload" class="custom-file-upload">
+            Upload File
+        </label>
+        <!-- Actual file input -->
+        <input id="file-upload" type="file" name="file" accept=".xlsx, .xls">
+        <!-- File name display -->
+        <div id="file-name"></div>
+        <!-- Submit button -->
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Display validation result and file URL (if available) -->
+    {% if validation_result %}
+    <p>Validation result: {{ validation_result }}</p>
+    {% endif %}
+    {% if file_url %}
+    <p>File URL: <a href="{{ file_url }}">{{ file_url }}</a></p>
+    {% endif %}
+    <!-- JavaScript to display the file name -->
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('file-name').innerText = 'Selected File: ' + fileName;
+        });
+    </script>
+</body>
+</html>
