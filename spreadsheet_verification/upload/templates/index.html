@@ -1,15 +1,20 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload and Validate Spreadsheet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
     <style>
         /* Hide the default file input button */
         input[type="file"] {
             display: none;
         }
+
         /* Style the custom button */
         .custom-file-upload {
             border: 1px solid #ccc;
@@ -19,42 +24,118 @@
             background-color: #f9f9f9;
             border-radius: 4px;
         }
+
         /* Style the file name display */
         #file-name {
             font-style: italic;
             margin-top: 5px;
         }
+
+        /* Style the validation result message */
+        #validation-result {
+            margin-top: 10px;
+            color: green;
+            /* Change color based on validation result */
+        }
     </style>
 </head>
+
 <body>
-    <h1>Upload and Validate Spreadsheet</h1>
-    <!-- Form for file upload -->
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Custom file upload button -->
-        <label for="file-upload" class="custom-file-upload">
-            Upload File
-        </label>
-        <!-- Actual file input -->
-        <input id="file-upload" type="file" name="file" accept=".xlsx, .xls">
-        <!-- File name display -->
-        <div id="file-name"></div>
-        <!-- Submit button -->
-        <button type="submit">Submit</button>
-    </form>
-    <!-- Display validation result and file URL (if available) -->
-    {% if validation_result %}
-    <p>Validation result: {{ validation_result }}</p>
-    {% endif %}
-    {% if file_url %}
-    <p>File URL: <a href="{{ file_url }}">{{ file_url }}</a></p>
-    {% endif %}
-    <!-- JavaScript to display the file name -->
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <h1>Upload and Validate Spreadsheet</h1>
+            <!-- Admin link -->
+            <div class="collapse d-flex" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a href="{% url 'admin:index' %}" target="_blank">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Upload File</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Upload your spreadsheet file for validation</h6>
+                        <p>Accepted file formats are: .xlsx, .xls</p>
+                        <!-- Form for file upload -->
+                        <form method="post" enctype="multipart/form-data" id="upload-form">
+                            {% csrf_token %}
+                            <!-- Custom file upload button -->
+                            <label for="file-upload" class="custom-file-upload">
+                                Upload File
+                            </label>
+                            <!-- Actual file input -->
+                            <input id="file-upload" type="file" name="file" class="form-control" accept=".xlsx, .xls" autocomplete="off">
+                            <!-- File name display -->
+                            <div id="file-name"></div>
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary" id="submit-btn" disabled>Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="card" id="validation-card" style="display: {% if not validation_result %}none{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">Validation Result</h5>
+    
+                        <!-- Validation result message -->
+                        {% if validation_result %}
+                        <p id="validation-result">{{ validation_result }}</p>
+                        {% endif %}
+    
+                        <!-- Display file name (if available) -->
+                        {% if file_name %}
+                        <p>File: {{ file_name }}</p>
+                        {% endif %}
+    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <!-- index.html -->
+                {% if file_content_html %}
+                <div>
+                    <h2>Uploaded File Content</h2>
+                    <!-- Display the content of the uploaded spreadsheet -->
+                    {{ file_content_html | safe }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript to display the file name and enable/disable submit button -->
     <script>
-        document.getElementById('file-upload').addEventListener('change', function() {
+        document.getElementById('file-upload').addEventListener('change', function () {
             var fileName = this.files[0].name;
             document.getElementById('file-name').innerText = 'Selected File: ' + fileName;
+
+            // Enable submit button when a file is selected
+            document.getElementById('submit-btn').disabled = false;
         });
+
+        // Disable submit button initially
+        document.getElementById('submit-btn').disabled = true;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
