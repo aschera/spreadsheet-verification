@@ -1,4 +1,7 @@
-![Image 1](./image1.png)
+<div style="border: 1px solid black; padding: 5px; display: inline-block;">
+    <img src="./image1.png" alt="Image Description" style="max-width: 100%; height: auto;">
+</div>
+
 # Spreadsheet Verification
 
 A web interface for uploading `.xlsx` files and verifying their content.
@@ -37,7 +40,9 @@ DATABASES = {
     }
 }
 ```
-![Image 2](./image2.png)
+<div style="border: 1px solid black; padding: 5px; display: inline-block;">
+    <img src="./image2.png" alt="Image Description" style="max-width: 100%; height: auto;">
+</div>
 
 ## Admin Panel
 To access the admin panel, you need to create a superuser account:
