@@ -66,19 +66,10 @@ Provide the requested information:
 - Password
 
 ## Dependencies
-List of external dependencies or libraries required to run the project goes here.
-
-## Configuration
-Details on any configuration settings or environment variables that need to be set up for the project.
+See requirements.txt
 
 ## Testing
-Instructions on how to run tests if implemented.
-
-## Deployment
-Deployment instructions or considerations, such as deploying to a cloud platform or setting up a production environment.
-
-## Contributing
-Guidelines for contributing to the project, including how to submit bug reports, feature requests, or pull requests.
+Not implemented yet.
 
 ## License
 This project is open-source and available under the MIT License.
