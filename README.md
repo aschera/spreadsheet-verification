@@ -1,7 +1,9 @@
 # Spreadsheet Verification
 
 A web interface for uploading `.xlsx` files and verifying their content.
-
+<br>
+Built with a Python Django backend, and Bootstrap for styling CSS.
+<br>
 <div style="border: 1px solid black; padding: 5px; display: inline-block;">
     <img src="./image1.png" alt="Image Description" style="max-width: 100%; height: auto;">
 </div>
