@@ -1,10 +1,12 @@
+# Spreadsheet Verification
+
+A web interface for uploading `.xlsx` files and verifying their content.
+
 <div style="border: 1px solid black; padding: 5px; display: inline-block;">
     <img src="./image1.png" alt="Image Description" style="max-width: 100%; height: auto;">
 </div>
 
-# Spreadsheet Verification
-
-A web interface for uploading `.xlsx` files and verifying their content.
+***
 
 ## Running the Server
 
@@ -16,7 +18,7 @@ To run the Django backend, follow these steps:
 ```bash
 python manage.py runserver
 ```
-
+***
 ## Updates
 To apply changes and updates, perform the following steps:
 
@@ -27,7 +29,7 @@ Run the following commands:
 python manage.py makemigrations
 python manage.py migrate
 ```
-
+***
 ## File Storage
 By default, Django uses SQLite for its database, suitable for development and testing purposes. The database file (db.sqlite3) will be created in the root directory of the project.
 
@@ -40,11 +42,15 @@ DATABASES = {
     }
 }
 ```
+***
+
+## Admin Panel
+
 <div style="border: 1px solid black; padding: 5px; display: inline-block;">
     <img src="./image2.png" alt="Image Description" style="max-width: 100%; height: auto;">
 </div>
 
-## Admin Panel
+
 To access the admin panel, you need to create a superuser account:
 
 Open a terminal inside the project directory (spreadsheet_verification).
