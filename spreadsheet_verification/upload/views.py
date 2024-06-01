@@ -1,7 +1,9 @@
+# views.py
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pandas as pd
 from .models import Upload
+from .validation import validate_excel  # Import the validate_excel function
 import logging
 
 logger = logging.getLogger(__name__)
@@ -17,11 +19,12 @@ def index(request):
             df = pd.read_excel(fs.path(name))
 
             # Convert the DataFrame to HTML for display
-            file_content_html = df.to_html()
+            file_content_html = df.to_html(classes=['table', 'table-striped', 'table-bordered', 'table-sm'], index=False)
             context['file_content_html'] = file_content_html
 
             # Validate the uploaded file
-            validation_result, is_valid = validate_uploaded_file(df)
+            validation_result = validate_excel(fs.path(name))
+            is_valid = "File is valid." in validation_result
         except Exception as e:
             validation_result = f"Validation failed: {str(e)}"
             is_valid = False
