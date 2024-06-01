@@ -1,4 +1,4 @@
-![Image 1](image1.jpg)
+![Image 1](./image1.jpg)
 # Spreadsheet Verification
 
 A web interface for uploading `.xlsx` files and verifying their content.
@@ -37,7 +37,7 @@ DATABASES = {
     }
 }
 ```
-![Image 2](image2.jpg)
+![Image 2](./image2.jpg)
 
 ## Admin Panel
 To access the admin panel, you need to create a superuser account:
